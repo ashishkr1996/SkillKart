@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA2kSB4ILhzqGI1iIUqtEWGU6XvikARssI",
+    authDomain: "fir-4863d.firebaseapp.com",
+    databaseURL: "https://fir-4863d.firebaseio.com",
+    projectId: "fir-4863d",
+    storageBucket: "",
+    messagingSenderId: "1067059077166"
+  };
+  firebase.initializeApp(config);
+</script>
+  <script type="text/javascript">
+  	function logout()
+	{
+
+		firebase.auth().signOut().then(function() {
+  		}).catch(function(error) {
+  			
+		});
+	}
+	firebase.auth().onAuthStateChanged(function(user) {
+    if (user) 
+    {
+     	 document.getElementById("login").style.visibility="hidden";
+         document.getElementById("logout").style.visibility="visible"; 
+    } 
+    else
+    {
+    	//alert("hii");
+         document.getElementById("login").style.visibility="visible";
+         document.getElementById("logout").style.visibility="hidden";
+    }
+    });
+  </script>
+  <style type="text/css"></style>
+  <style>
+  	a.a1{
+  		color:white;
+  		text-decoration:none;
+	}
+	a.a2{
+		color:#880e4f;
+	}
+	.login-logout{
+		background-color:#880e4f;
+		border:1px solid white;
+		border-radius:20px;
+		font-size:20px;
+		padding:5px 12px 5px 12px;
+	}
+	.login-logout:hover{
+		background-color: #c51162;
+	}
+	.logo{
+		height:10%;
+		width:10%;
+	}
+	.containerlogo{
+		margin-top:5%;
+		margin-bottom:5%;
+		background-color:#e6e6fa;
+	}
+  </style>
+</head>
+<body bgcolor="#faebd7">
+	<!--Header-->
+	<div class="container-fluid">
+		<div class="row" style="background-color:#880e4f;color:white;">
+			<div class="col-xs-12 col-lg-6">
+				<!--<label style="font-size:30px; font-family:georgia;" class="text-left">SkillKart </label>--> 
+				<img src="slogo.png" height="5%" width="30%"></img> 	
+			</div>
+			<div class="col-xs-12 col-lg-6 text-right icon-addon addon-lg" style="padding:8px 5px 5px 5px;">
+				<i class="fas fa-mobile"></i> &nbsp&nbsp<label class="l1"style="font-size:15px;"><a href="#" class="a1">Download App</a></label>&nbsp&nbsp&nbsp&nbsp
+				<i class="fas fa-map-marker"></i>&nbsp&nbsp<label style="font-size:15px;"><a href="#" class="a1">Select Location</a></label>&nbsp&nbsp&nbsp&nbsp
+				<a href="login.html">
+					<input type="button" value="Login" id="login" class="login-logout" >
+				</a>
+				<input type="button" value="Logout" id="logout" onclick="logout()"class="login-logout" style="visibility:hidden;">
+				<!--<input type="text" placeholder="search" style="color:black;height:30px;width:200px;border-radius: 5px;"> -->
+			</div>
+		</div>
+	</div>
+	<!--Header-->
+	<!--Navigation-->
+	<div class="container-fluid" >
+		
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="" class="a2">Home<span class="caret"></span></a></li>
+				<li><a class="a2" href="">Service<span class="caret"></span></a></li>
+				<li><a class="a2" href="">Appliances<span class="caret"></span></a></li>
+				<li><a class="a2" href="">Electisian<span class="caret"></span></a></li>
+			</ul>
+		</div>
+	</div>
+	<!--Navigation-->
+
+	<!--Carousel-->
+	<div class="container-fluid">
+		<div class="row">
+		    <div id="my_carousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+			  <ol class="carousel-indicators">
+				<li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+				<li data-target="#my_carousel" data-slide-to="1"></li>
+				<li data-target="#my_carousel" data-slide-to="2"></li>
+			  </ol>
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="s1.jpg" class="img-responsive i" >
+				</div>
+				<div class="item">
+					<img src="s2.jpg" class="img-responsive i" >
+				</div>
+				<div class="item">
+					<img src="s3.jpg" class="img-responsive i" >
+				</div>
+			</div>
+			<a class="left carousel-control" href="#my_carousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a class="right carousel-control" href="#my_carousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div>
+			
+	</div>	
+	</div>
+	<!--Carousel-->
+
+	<!--Content-->
+		<div class="container containerlogo">
+			<div class="row text-center">
+				<div class="col-lg-12 col-xs-12" style=" background-color: white;">
+					<span style="margin-right: 4%;">
+						<a href="plumber.html"><img src="logoimage/img1.png" class="logo img-circle img-thumbnail "></img></a>
+					</span>
+
+					<span style="margin-right: 4%;">
+						<img src="logoimage/img2.png" class="logo img-circle img-thumbnail"></img>
+					</span>
+					
+					<span style="margin-right: 4%;">
+						<img src="logoimage/img3.png" class="logo img-circle img-thumbnail"></img>
+					</span>
+					
+					<span style="margin-right: 4%;">
+						<img src="logoimage/img4.png" class="logo img-circle img-thumbnail"></img>
+					</span>
+					
+					<span style="margin-right: 4%;">
+						<img src="logoimage/img5.png" class="logo img-circle img-thumbnail"></img>
+					</span>
+					
+					<span style="margin-right: 4%;">
+						<img src="logoimage/img6.png" class="logo img-circle img-thumbnail"></img>
+					</span>
+					
+				</div>
+			</div>
+		</div>
+
+	<!--Content-->
+
+	<!-- Footer -->
+		<div class="container-fluid">
+			<div class="row" style="background-color:#c51162;padding:2% 2% 2% 2%; color:white;">
+				<div class="col-lg-6" >
+					<label style="font-size:30px;">SkillKart</label><br>
+					
+				</div>
+				<div class="col-lg-6 " >
+					<label style="font-size:20px;">COMPANY</label><br>
+					About us<br>
+					Privacy<br>
+					FAQ & Terms of Use<br>
+					Contact Us<br>
+					Blog<br>	
+					Coupons<br>
+					Sitemap<br>
+					Facilities Services<br>
+
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<div class="row" style="background-color:#c51162;color:white;padding:5% 5% 5% 5%">
+				<div class="col-xs-4">
+					APPLIANCES<br><br><br>
+					HOME NEEDS<br><br><br>
+					HOME CLEANING<br><br><br><br>
+					BEAUTY SERVICES<br><br>
+					SPECIAL SERVICES
+					
+				</div>
+				<div class="col-xs-8">
+					Computer Repair |  TV | AC | Geyser | Washing Machine | Microwave Oven | Chimney and Hob | Water Purifier | Refrigerator |<br><br><br>
+					Laundry | Electrical | Pest Control | Carpentry | Plumbing | Painting | Movers & Packers | Shower Filters |<br><br><br>
+					Bedroom Deep Cleaning | Overhead Water Storage Tank Cleaning | Underground Sump Cleaning | Dining Chair Shampooing | Office Chair Shampooing | Home Deep <br><br>
+					Pedicure | Facials & Clean-Ups | Bleach | Threading | Detanning | Manicure | Massages |<br><br>
+					Healthcare | Document Services | Cars & Bikes | Movers & Packers | Rangoli | Puja/Pandit | Home Automation | Driving School |
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="container-fluid" style="background-color:#00aa8d;margin-bottom:0.1%;">
+			<div class="text-center">
+				<img src="fb.png">
+				<img src="gmail.png">
+				<img src="twitter.png">
+				<img src="insta.png">
+			</div>
+		</div>
+		
+		<div class="container-fluid" style="background-color:#008975;font-size:15px; color:white;">
+			<div class="text-center">
+				© SkillKart 2018. All Rights Reserved.
+			</div>
+			
+		</div>
+	<!-- Footer -->
+
+	<script type="text/javascript">
+		/*var url=window.location;
+      		alert(url.hash);
+      		if(url.hash=='#logout')
+      		{
+      			//alert("hii");
+      			document.getElementById("logout").style.visibility="visible";
+      			document.getElementById("login").style.visibility="hidden";
+      		}*/
+
+	</script>
+</body>
+</html>
+

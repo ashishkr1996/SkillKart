@@ -1,0 +1,69 @@
+/* Your custom styles */
+.form_div{ 
+	margin-left: 35% !important;
+    margin-top: 5%;
+    position:relative;
+}
+
+
+.footer_div
+{
+	margin-top:0% !important; 
+}
+
+.img_style
+{
+height:100%;
+width:100%; 
+}
+
+.row_d1
+{
+background-color:#f0f0f5 !important;
+margin-left:15% !important;
+margin-right:15% !important;
+padding-top:2% !important;
+padding-right:5% !important;
+padding-left:5% !important;
+border-radius:70px;
+}
+
+.row_d
+{
+background-color:#f0f0f5 !important;
+margin-left:5% !important;
+margin-right:5% !important;
+padding-top:2% !important;
+padding-right:3% !important;
+padding-left:3% !important;
+border-radius:50px;
+}
+.h1{
+		padding:1px !important;
+	}
+	
+	
+.cus_size{
+height:20% !important;	
+	
+	
+	
+}
+
+input::-webkit-input-placeholder { 
+  color: white !important;
+}
+
+
+
+
+.menu_height:hover {
+    background-color: #d1d1e0;
+    color: white;
+}
+
+.menu_height{
+	
+	height:250px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

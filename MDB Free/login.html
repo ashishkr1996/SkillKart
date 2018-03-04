@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Login Page</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+   
+    
+	
+	<link id="size-stylesheet" rel="stylesheet" type="text/css" href="css/style1.css" />
+	<script src="/project/md/js/jquery-3.2.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA2kSB4ILhzqGI1iIUqtEWGU6XvikARssI",
+    authDomain: "fir-4863d.firebaseapp.com",
+    databaseURL: "https://fir-4863d.firebaseio.com",
+    projectId: "fir-4863d",
+    storageBucket: "fir-4863d.appspot.com",
+    messagingSenderId: "1067059077166"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+function adjustStyle(width) {
+	  width = parseInt(width);
+	  if (width < 701) {
+	    $("#size-stylesheet").attr("href", "css/style.css");
+	  } else {
+	     $("#size-stylesheet").attr("href", "css/style1.css"); 
+	  }
+	}
+
+	$(function() {
+	  adjustStyle($(this).width());
+	  $(window).resize(function() {
+	    adjustStyle($(this).width());
+	  });
+	});
+</script>
+<script>
+    function login()
+    {
+        //alert("hello");
+        var email=document.getElementById("un").value;
+        var password=document.getElementById("pass").value;
+        
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorCode+" "+errorMessage);
+        });
+    }
+    /*function logout()
+    {
+        firebase.auth().signOut().then(function() {
+           
+        }).catch(function(error) {
+    
+        });
+    }*/
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) 
+    {
+       window.location="dashboard.html";
+    } 
+    else
+    {
+         
+    }
+    });
+</script>
+</head>
+
+<body >
+<nav  class="navbar navbar-dark indigo" >
+    <a class="navbar-brand" class="brand"  href="#" >Skillkart</a>
+    
+    
+    <form class="form-inline" action="review.jsp" method="post" autocomplete="on">
+    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success btn-sm my-0" type="submit">Search</button>
+</form>
+</nav>
+
+<main>
+<form class="form_div col-sm-4" class="form_div" action="login.jsp" method="post" autocomplete="on">
+    <p class="h2 text-center mb-4">Sign in</p>
+
+    <div class="md-form" >
+        <i class="fa fa-user-circle prefix grey-text"></i>
+        <input type="text" id="un" class="form-control" placeholder="Your Username">
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="password" id="pass" class="form-control" placeholder="Your Password">
+         <p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1"> Password?</a></p>
+                    
+    </div>
+<div class="text-center	">
+    <div class="col " >
+       <input type='button' class="btn btn-default" value='Sign In' onclick="login()"><br>
+        <!--<input type='button' class="btn btn-default" value='Sign out' onclick="logout()"><br>-->
+        
+    </div>
+    </div>
+</form>
+
+</main>
+
+<footer class="page-footer sticky-bottom stylish-dark indigo"  class="footer_div" style="margin-top:17% !important" >
+
+<!--Call to action-->
+    <div class="call-to-action">
+        <ul>
+            <li>
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li><a href="Registration.html" class="btn btn-danger btn-rounded">Sign up!</a></li>
+        </ul>
+    </div>
+    <!--/.Call to action-->
+  <!--Social buttons-->
+    <div class="social-section text-center">
+        <ul>
+
+            <li><a class="btn-floating btn-sm btn-fb"><i class="fa fa-facebook fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-tw"><i class="fa fa-twitter fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-gplus"><i class="fa fa-google-plus fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-li"><i class="fa fa-linkedin fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-dribbble"><i class="fa fa-dribbble fa-2x"> </i></a></li>
+
+        </ul>
+    </div>
+    <!--/.Social buttons-->
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="https://www.skillkart.com"> Skillkart.com </a>
+
+        </div>
+    </div>
+    <!--/.Copyright-->
+
+</footer>             
+
+
+</body>
+
+</html>

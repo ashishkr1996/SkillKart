@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Registration_confirm Page</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+   <link id="size-stylesheet" rel="stylesheet" type="text/css" href="css/style1.css" />
+	<script src="/project/md/js/jquery-3.2.1.min.js"></script>
+
+<script>
+function adjustStyle(width) {
+	  width = parseInt(width);
+	  if (width < 701) {
+	    $("#size-stylesheet").attr("href", "css/style.css");
+	  } else {
+	     $("#size-stylesheet").attr("href", "css/style1.css"); 
+	  }
+	}
+
+	$(function() {
+	  adjustStyle($(this).width());
+	  $(window).resize(function() {
+	    adjustStyle($(this).width());
+	  });
+	});
+</script>
+</head>
+
+<body>
+<nav  class="navbar navbar-dark indigo">
+    <a class="navbar-brand" href="http://www.Skillkart.com">Skillkart</a>
+    
+</form>
+</nav>
+
+<!-- Form register -->
+<div class="jumbotron">
+    <h1 class="h1-responsive">Thanks For Signing up!!</h1>
+    <p class="lead">You Information are been Registered.</p>
+    <hr class="my-2">
+    <p>We would send a Confirmation Mail and Message once it is verified.
+    </p>
+</div>
+<!-- Form register -->
+     
+    
+
+
+
+     <footer class="page-footer sticky-bottom stylish-dark indigo"  style="margin-top:25% !important">
+      <!--/.Call to action-->
+  <!--Social buttons-->
+    <div class="social-section text-center">
+        <ul>
+
+            <li><a class="btn-floating btn-sm btn-fb"><i class="fa fa-facebook"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-tw"><i class="fa fa-twitter"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-gplus"><i class="fa fa-google-plus"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-li"><i class="fa fa-linkedin"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-dribbble"><i class="fa fa-dribbble"> </i></a></li>
+
+        </ul>
+    </div>
+    <!--/.Social buttons-->
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="https://www.Skillkart.com"> Skillkart.com </a>
+
+        </div>
+    </div>
+    <!--/.Copyright-->
+
+</footer>             
+</body>
+</html>

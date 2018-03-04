@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Registration Page</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+   <link id="size-stylesheet" rel="stylesheet" type="text/css" href="css/style1.css" />
+	<script src="/project/md/js/jquery-3.2.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA2kSB4ILhzqGI1iIUqtEWGU6XvikARssI",
+    authDomain: "fir-4863d.firebaseapp.com",
+    databaseURL: "https://fir-4863d.firebaseio.com",
+    projectId: "fir-4863d",
+    storageBucket: "fir-4863d.appspot.com",
+    messagingSenderId: "1067059077166"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+function adjustStyle(width) {
+	  width = parseInt(width);
+	  if (width < 701) {
+	    $("#size-stylesheet").attr("href", "css/style.css");
+	  } else {
+	     $("#size-stylesheet").attr("href", "css/style1.css"); 
+	  }
+	}
+
+	$(function() {
+	  adjustStyle($(this).width());
+	  $(window).resize(function() {
+	    adjustStyle($(this).width());
+	  });
+	});
+</script>
+<script>
+	function insertCustomerData()
+	{
+        var insert=0;
+        var cemail="";
+		var fname=document.getElementById("fn").value;
+		var mob=document.getElementById("mob").value;
+		var add=document.getElementById("add").value;
+		var pass=document.getElementById("p1").value;
+		var email=document.getElementById("e").value;
+        
+        var semail=email.split(/[@.,#$]/);
+        for(var val=0;val<semail.length;val++)
+        {
+            cemail=cemail+semail[val];
+                
+        }
+        //alert(cemail);
+		//alert(fname+" "+email+" "+mob+" "+add+" "+pass);
+        firebase.auth().createUserWithEmailAndPassword(email, pass).then(function(){
+                firebase.database().ref("customer").child(cemail).set({
+                    name: fname,
+                    email: email,
+                    mob :mob,
+                    add:add,
+                    password:pass
+                }).then(function(){
+                    window.location="dashboard.html"; 
+                    }).catch(function(error){
+                        var errorCode=error.code;
+                        var errorMessage=error.message;
+                        alert(errorCode+" "+errorMessage);
+                    }); 
+            }).catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              
+              alert(errorCode+" "+errorMessage);
+            });
+    }
+
+    function insertServiceData()
+    {
+
+        var insert=0;
+        var cemail1="";
+        var sfname=document.getElementById("sfn").value;
+        var smob=document.getElementById("smob").value;
+        var sadd=document.getElementById("sadd").value;
+        var spass=document.getElementById("sp1").value;
+        var semail=document.getElementById("se").value;
+        var sfile=document.getElementById("sf").files[0];
+         //alert(sfname+smob+sadd+spass+semail+sfile);
+        var semail1=semail.split(/[@.,#$]/);
+        //alert(semail1[0]);
+        for(var val=0;val<semail1.length;val++)
+        {
+            cemail1=cemail1+semail1[val];
+                
+        }
+        alert(cemail1);
+        //alert(fname+" "+email+" "+mob+" "+add+" "+pass);
+        firebase.auth().createUserWithEmailAndPassword(semail, spass).then(function(){
+                firebase.storage().ref("document/"+ sfile.name).put(sfile);
+                firebase.database().ref("service").child(cemail1).set({
+                    name: sfname,
+                    email: semail,
+                    mob :smob,
+                    add:sadd,
+                    password:spass
+                 }).then(function(){
+                    window.location="dashboard.html"; 
+                    }).catch(function(error){
+                        var errorCode=error.code;
+                        var errorMessage=error.message;
+                        alert(errorCode+" "+errorMessage);
+                    }); 
+            }).catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              alert(errorCode+" "+errorMessage);
+            });
+    }
+
+	function validateData(id)
+	{
+        if(id=='cbutton')
+        {
+            var fname=document.getElementById("fn").value.trim();
+            var mob=document.getElementById("mob").value.trim();
+            var add=document.getElementById("add").value.trim();
+            var pass=document.getElementById("p1").value.trim();
+            var pass2=document.getElementById("p2").value.trim();
+            var email=document.getElementById("e").value.trim();
+        // alert(fname+pass+pass2+mob+add+email);
+        
+            if(fname!=""&&mob!=""&&add!=""&&pass!=""&&pass2!=""&&email!="")
+            {
+                if(pass==pass2)
+                {
+                    insertCustomerData();
+                }
+                else
+                {
+                    alert("Password mismatch");
+                }   
+            }
+            else
+            {
+                alert("Enter Data");
+            } 
+        }
+        else
+        {
+            //alert("hii");
+            var sfname=document.getElementById("sfn").value.trim();
+            var smob=document.getElementById("smob").value.trim();
+            var sadd=document.getElementById("sadd").value.trim();
+            var spass=document.getElementById("sp1").value.trim();
+            var spass2=document.getElementById("sp2").value.trim();
+            var semail=document.getElementById("se").value.trim();
+            var sfile=document.getElementById("sf").files[0].type;
+           // alert(sfile);
+        
+            if(sfname!=""&&smob!=""&&sadd!=""&&spass!=""&&spass2!=""&&semail!="")
+            {
+                if(spass==spass2)
+                {
+                    if(sfile=='image/jpg'||sfile=='image/jpeg')
+                        insertServiceData();
+                    else
+                        alert("image should be in JPG format");
+                }
+                else
+                {
+                    alert("Password mismatch");
+                }   
+            }
+            else
+            {
+                alert("Enter Data");
+            } 
+        }
+		
+    }
+
+	
+
+    function checkFields(id)
+    {
+        //alert("hii");
+        var length=document.getElementById(id).value.trim();
+       
+        if(length=="")
+        {
+            document.getElementById(id).style.borderColor="red";
+           // document.getElementById("i1").style.backgroundColor"red";
+        }        
+    }
+
+    function checkClick(id)
+    {
+        document.getElementById(id).style.borderColor="blue";
+    }
+
+    function showRegistration(id)
+    {
+        //alert("hiii");
+        if(id=='service')
+        {
+            document.getElementById("show2").style.display="block";
+            document.getElementById("show").style.display="none"; 
+        }
+        else
+        {
+
+            document.getElementById("show").style.display="block";
+            document.getElementById("show2").style.display="none";
+        }
+    }
+
+   
+</script>
+</head>
+
+<body>
+<nav  class="navbar navbar-dark indigo">
+    <a class="navbar-brand" href="http://www.Skillkart.com">Skillkart</a>
+    
+</form>
+</nav>
+
+<!-- Form register -->
+<form class="form_div col-sm-4" class="form_div" action="" method="post" autocomplete="on">
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="radio" checked value="Customer SignUp" name="s" id="customer" onclick="showRegistration(this.id)"style="width:24px;height:24px;position:relative;top:6px;">&nbspCustomer SignUp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <input type="radio" value="Service SignUp" name="s" style="width:24px;height:24px;position:relative;top:6px;" id="service" onclick="showRegistration(this.id)">&nbspService SignUp
+
+    <div id="show">
+
+        <div class="md-form">
+            <i id="i1" class="fa fa-user prefix grey-text"></i>
+            <input type="text"  class="form-control f1" placeholder="Your name" required id="fn" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="email"  class="form-control f1" placeholder="Your email" required id="e" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+        
+    
+
+        <div class="md-form">
+            <i class="fa fa-user-circle prefix grey-text"></i>
+            <input type="text"  class="form-control f1" placeholder="Your Phone No" required id="mob" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+    
+    
+        <div class="md-form">
+            <i class="fa fa-map-marker prefix grey-text"></i>
+            <input type="text"  class="form-control f1" placeholder="Your Address" id="add" onblur="checkFields(this.id)" required onclick="checkClick(this.id)">
+        </div> 
+      
+          
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password"class="form-control f1" placeholder="Enter Password" required id="p1" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password"  class="form-control f1" placeholder="Reenter Password" required id="p2" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+    
+        <div class="text-center	">
+            <div class="col " >
+                <input type='button' id="cbutton" class="btn btn-default" value='Customer Register' onclick="validateData(this.id)" ><br>
+            </div>
+        </div>
+    </div>
+
+        <div id="show2" style="display:none;">
+
+            <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" class="form-control f1" placeholder="Your name" required id="sfn" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="email"  class="form-control f1" placeholder="Your email" required id="se" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+        
+    
+
+        <div class="md-form">
+            <i class="fa fa-user-circle prefix grey-text"></i>
+            <input type="text"  class="form-control f1" placeholder="Your Phone No" required id="smob" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+    
+    
+        <div class="md-form">
+            <i class="fa fa-map-marker prefix grey-text"></i>
+            <input type="text" class="form-control f1" placeholder="Your Address" id="sadd" onblur="checkFields(this.id)" required onclick="checkClick(this.id)">
+        </div> 
+      
+          
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password"  class="form-control f1" placeholder="Enter Password" required id="sp1" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password"  class="form-control f1" placeholder="Reenter Password" required id="sp2" onblur="checkFields(this.id)" onclick="checkClick(this.id)">
+        </div>
+
+         <div class="md-form">
+            <i class="fa fa-camera fa-2x grey-text" ></i>
+            <input type="file" name="file" id="sf" class="form-control f1"  required >
+        </div>
+    
+        <div class="text-center ">
+            <div class="col " >
+                <input type='button' id="sbutton" class="btn btn-default" value='Service Register' onclick="validateData(this.id)" ><br>
+            </div>
+        </div>
+
+        </div>
+</form>
+<!-- Form register -->
+     
+    
+
+
+
+     <footer class="page-footer sticky-bottom stylish-dark indigo"  style="margin-top:17% !important">
+      <!--/.Call to action-->
+  <!--Social buttons-->
+    <div class="social-section text-center">
+        <ul>
+
+            <li><a class="btn-floating btn-sm btn-fb"><i class="fa fa-facebook fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-tw"><i class="fa fa-twitter fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-gplus"><i class="fa fa-google-plus fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-li"><i class="fa fa-linkedin fa-2x"> </i></a></li>
+            <li><a class="btn-floating btn-sm btn-dribbble"><i class="fa fa-dribbble fa-2x"> </i></a></li>
+
+        </ul>
+    </div>
+    <!--/.Social buttons-->
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="https://www.Skillkart.com"> Skillkart.com </a>
+
+        </div>
+    </div>
+    <!--/.Copyright-->
+
+</footer>             
+</body>
+</html>

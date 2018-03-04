@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+   <link id="size-stylesheet" rel="stylesheet" type="text/css" href="css/style1.css" />
+	<script src="/project/md/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/google_map.js"></script>
+	
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+   
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA2kSB4ILhzqGI1iIUqtEWGU6XvikARssI",
+    authDomain: "fir-4863d.firebaseapp.com",
+    databaseURL: "https://fir-4863d.firebaseio.com",
+    projectId: "fir-4863d",
+    storageBucket: "",
+    messagingSenderId: "1067059077166"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+function adjustStyle(width) {
+	  width = parseInt(width);
+	  if (width < 701) {
+	    $("#size-stylesheet").attr("href", "css/style.css");
+	  } else {
+	     $("#size-stylesheet").attr("href", "css/style1.css"); 
+	  }
+	}
+
+	$(function() {
+	  adjustStyle($(this).width());
+	  $(window).resize(function() {
+	    adjustStyle($(this).width());
+	  });
+	});
+
+</script>
+<script>
+	function logout()
+	{
+		firebase.auth().signOut().then(function() {
+  		}).catch(function(error) {
+  	
+		});
+	}
+	firebase.auth().onAuthStateChanged(function(user) {
+    if (user) 
+    {
+        document.getElementById("login").style.visibility="hidden";
+         document.getElementById("logout").style.visibility="visible"; 
+     } 
+    else
+    {
+         document.getElementById("login").style.visibility="visible";
+         document.getElementById("logout").style.visibility="hidden";
+    }
+    });
+		 
+    	
+	
+	/*$(document).ready({
+		//alert("window.location.hash");
+   		if (window.location.hash == "#show") {
+      		$(".logout").css("display", "block");
+      		$(".login").css("display", "none");
+ 	  	}
+	});*/
+</script>
+<style>
+	.h1{
+		padding:2px 2px 2px 2px;
+	}	
+	.logout{
+		font-size:15px;
+		visibility:hidden;
+	}
+</style>
+</head>
+
+<body style="background-color:#d1d1e0;" onload="viewLogout()">
+
+
+<div class="container-fluid" style="background-color:#5566c3;" >
+    <!-- Navbar brand -->
+    <div class="row h1"  >
+    	<div class="col-lg-3 text-left">
+    		<a class="navbar-brand" href="#" style="color:white;font-size:30px;">SKILLKART</a>
+    		
+    	</div>
+        
+           
+         <div class="col-lg-3 text-center">
+        		<form class="form-inline " >
+                <input class="form-control " placeholder="Search" type="text"  aria-label="Search" style="color:white;font-size:20px;">
+                
+       			 </form>
+        	</div>
+        <div class="col-lg-6 text-right" >
+        
+        
+        <!-- map Start -->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalRegular">My Location</button>
+        <div class="modal fade" id="modalRegular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Body-->
+            <div class="modal-body mb-0 p-0">
+
+                <!--Google map-->
+                <div id="map-container-9" class="z-depth-1-half" style="height: 400px"> 
+                <div id="map"></div>
+                </div>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+
+                <button type="button" class="btn btn-info btn-md">Save location <i class="fa fa-map-marker ml-1"></i></button>
+                <button type="button" class="btn btn-outline-info btn-md" data-dismiss="modal">Close <i class="fa fa-times ml-1"></i></button>
+
+            </div>
+
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+
+
+
+
+<!-- map end -->
+        <a href="login.html">
+        <button type="button" id="login" class="btn btn-pink btn-lg" style="font-size:15px;">login</button>
+        </a>
+
+        <button type="button" id="logout" class="btn btn-warning btn-lg logout" onclick="logout()">logout</button>
+       
+        </div>
+   </div>
+    <!-- Collapsible content -->
+</div>
+
+
+<div class="container-fluid">
+		
+			<ul class="nav navbar-pills">
+			
+				<li class="active"><a href="" style="color:black;">Home<span class="caret"></span></a></li>
+				<li><a href="" style="color:black;">Service<span class="caret"></span></a></li>
+				<li><a href="" style="color:black;">Appliances<span class="caret"></span></a></li>
+				<li><a href="" style="color:black;">Electrical<span class="caret"></span></a></li>
+			</ul>
+		</div>
+	</div>
+
+<!--/.Navbar-->
+
+<div class="container-fluid">
+		<div class="row">
+		    <div id="my_carousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+			  <ol class="carousel-indicators">
+				<li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+				<li data-target="#my_carousel" data-slide-to="1"></li>
+				<li data-target="#my_carousel" data-slide-to="2"></li>
+			  </ol>
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="1.jpg" class="img-responsive i" >
+				</div>
+				<div class="item">
+					<img src="2.jpg" class="img-responsive i" >
+				</div>
+				<div class="item">
+					<img src="3.jpg" class="img-responsive i" >
+				</div>
+			</div>
+			<a class="left carousel-control" href="#my_carousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a class="right carousel-control" href="#my_carousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div>
+			
+	</div>	
+	</div>
+
+
+				
+
+
+
+
+<div style="text-align:center;padding-top:1%;">
+<h1>Our Services</h1>
+</div>
+<div class="row row_d1"  >
+<div class="col-sm-2 ">
+ <!--Card image-->
+ 	<a href="Plumber.html">
+    <img class="img-thumbnail " src="image/img2.png" alt="Card image cap" style="border-radius:50%;">
+    </a>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 70%;">PLUMBING</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+ 	<a href="Electrician.html">
+    <img class="img-thumbnail" src="image/img1.png" alt="Card image cap"  style="border-radius:50%;">
+    </a>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 70%;">ELECTRICAL</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+  	<a href="Carpenter.html">
+    <img class="img-thumbnail" src="image/img5.png" alt="Card image cap" style="border-radius:50%;">
+    </a>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 70%;">CARPENTRY</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+ 	<a href="Pestcontrol.html">
+    <img class="img-thumbnail" src="image/img3.png" alt="Card image cap" style="border-radius:50%;">
+    </a>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 70%;">PEST CONTROL</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+ 	<a href="Appliances.html">
+    <img class="img-thumbnail" src="image/img6.png" alt="Card image cap" style="border-radius:50%;">
+	</a>
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 70%;">APPLIANCES</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+ 	<a href="Homeclean.html">
+    <img class="img-thumbnail" src="image/img4.png" alt="Card image cap" style="border-radius:50%;">
+	</a>
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 70%;">HOME CLEANING </h4>
+       
+       
+    </div>
+</div>
+</div>
+<div style="text-align:center;margin-top:10px;">
+<h1>Spring Flash SALE - Save 18%</h1>
+</div>
+
+<div class="row row_d" >
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_6 (2).jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">BATHROOM WATER FILTER</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_7.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">ANT CONTROL</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_8.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">INVERTER INSTALLATION</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_9.jpg" alt="Card image cap" style="border-radius:50%;" >
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">NEW SOFA</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_4.jpg" alt="Card image cap" style="border-radius:50%;" >
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">BEDROOM DEEP CLEANING</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_1.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">AC INSTALLATION</h4>
+       
+       
+    </div>
+</div>
+</div>
+
+
+
+
+<div style="text-align:center;margin-top:10px;margin-bottom:10px;" >
+<h1>Repair Services</h1>
+</div>
+
+<div class="row row_d" >
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_5.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">FURNITURE REPAIR</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_2.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">CEILING FAN</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_10.bmp" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">AC SERVICING</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_11.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">GAS REFILL</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_4.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">BEDROOM DEEP CLEANING</h4>
+       
+       
+    </div>
+</div>
+<div class="col-sm-2">
+ <!--Card image-->
+    <img class="img-thumbnail" src="image/img_12.jpg" alt="Card image cap" style="border-radius:50%;">
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title" style="text-align:center;font-size: 100%;"">WIRING</h4>
+       
+       
+    </div>
+</div>
+</div>
+
+
+<div style="margin-top:5%;margin-bottom:5%;">
+	<div class="row">
+		<div class="col-sm-4" style="border-right: 6px solid black;">
+			<h1 style="text-align:center;line-height: 0.10;margin-top:5%;">1.5 Million </h1><br>
+			<h3 style="text-align:center;">Customer Served</h3>
+		</div>
+		<div class="col-sm-4" style="border-right: 6px solid black;">
+			<h1 style="text-align:center;line-height: 0.10;margin-top:5%;">65,000</h1><br>
+			<h3 style="text-align:center;">Verified Experts</h3>
+		</div>
+		<div class="col-sm-4">
+			<h1 style="text-align:center;line-height: 0.10;margin-top:5%;">100+ </h1><br>
+			<h3 style="text-align:center;">live Services</h3>
+		</div>
+	</div>
+</div>
+
+
+<div class="container-fluid" style="background-color:#5566c3;margin-top:10px;padding:20px;">
+	<div class="row" style="padding:20px;">
+		<div class="col-lg-3 col-xs-12 text-center" style="background-color:white;padding:20px;border-right: 6px solid black;border-left: 6px solid black;">
+                <img src="img2/vp.png" height="50%" width="51%"></img><br><br><br>
+                <h4 class="card-title" style="font-size:190%;">Verified Professionals</h4>
+    			<p class="card-text" style="font-size:100%;">All our professionals are background checked and verified to ensure your complete safety.</p>
+    	</div>
+		<div class="col-lg-3 col-xs-12  text-center" style="background-color:white;padding:20px;border-right: 6px solid black;">
+                 <img src="img2/iw.png" height="50%" width="51%"></img><br><br><br>
+   				 <h4 class="card-title" style="font-size:190%;">Insured Work</h4>
+   			 	 <p class="card-text" style="font-size:100%;">To make sure your trust in us is a 100%, we provide insurance coverage across our services.
+    					 The insurance period & amount varies from service to service..</p>
+   		</div>
+	
+	    <div class="col-lg-3 col-xs-12  text-center" style="background-color:white;padding:20px;border-right: 6px solid black;">
+            <img src="img2/sg.png" height="50%" width="51%"></img><br><br><br>
+    		<h4 class="card-title" style="font-size:180%;">Satisfaction Guaranteed</h4>
+    		<p class="card-text" style="font-size:100%;">We hire only the most qualified professionals to ensure high quality services, such that your satisfaction levels are always at a 100%.</p>
+    		
+		</div>
+		<div class="col-lg-3 col-xs-12  text-center" style="background-color:white;padding:20px;border-right: 6px solid black;">
+            <img src="img2/ot.png" height="46%" width="50%"></img><br><br><br><br>
+    		<h4 class="card-title" style="font-size:190%;">On Time Arrival</h4>
+    		<p class="card-text" style="font-size:100%;">We ensure our professionals will arrive at your doorstep on time, every time.</p>
+    		
+		</div>
+	</div>
+</div>
+
+ <!--Footer-->
+      <footer class="page-footer font-small dark indigo pt-4 mt-4">
+      
+          <!--Footer Links-->
+          <div class="container-fluid text-center text-md-left">
+              <div class="row">
+      
+                  <!--First column-->
+                  <div class="col-md-6">
+                      <h5 class="text-uppercase">Skillkart</h5>
+                      <p>Trident Academy of Technology<br>
+                      Technology Corridor, Infocity, Chandrasekharpur, Bhubaneswar, Odisha 751024</p>
+                  </div>
+                  <!--/.First column-->
+      				
+                  <!--Second column-->
+                  <div class="col-md-6">
+                      <h5 class="text-uppercase">COMPANY</h5>
+                      <ul class="list-unstyled">
+               				<li><a href="#!">
+ 							<i class="fa fa-mobile white-text" aria-hidden="true"></i> <span style="color:white;">DOWNLOAD APP</span>
+ 							</a></li>
+ 	
+                          <li><a href="#!">About us</a></li>
+                          <li><a href="#!">Privacy</a></li>
+                          <li><a href="#!">FAQ & Terms of Use</a></li>
+                          <li><a href="#!">Contact Us</a></li>
+                          <li><a href="#!">Sitemap</a></li>
+                      </ul>
+                  </div>
+                  <!--/.Second column-->
+                  
+              </div>
+          </div>
+          
+          <!--/.Footer Links-->
+      
+      		<div class="text-center">
+              <ul class="list-unstyled list-inline">
+                  <li class="list-inline-item"><a class="btn-floating btn-sm btn-fb mx-1"><i class="fa fa-facebook fa-2x"> </i></a></li>
+                  <li class="list-inline-item"><a class="btn-floating btn-sm btn-tw mx-1"><i class="fa fa-twitter fa-2x"> </i></a></li>
+                  <li class="list-inline-item"><a class="btn-floating btn-sm btn-gplus mx-1"><i class="fa fa-google-plus fa-2x"> </i></a></li>
+                  <li class="list-inline-item"><a class="btn-floating btn-sm btn-li mx-1"><i class="fa fa-linkedin fa-2x"> </i></a></li>
+                  <li class="list-inline-item"><a class="btn-floating btn-sm btn-dribbble mx-1"><i class="fa fa-dribbble fa-2x"> </i></a></li>
+              </ul>
+          </div>
+          <!--Copyright-->
+          <div class="footer-copyright py-3 text-center">
+              <div class="container-fluid">
+                  <label style="font-size:15px;top:-2px;position:relative;">© 2015 Copyright:</label> <a href="https://Skillkart/" style="font-size:20px;"> 
+                  Skillkart </a>
+      
+              </div>
+          </div>
+          <!--/.Copyright-->
+      
+      </footer>
+      <!--/.Footer-->
+
+     
+
+
+          
+</body>
+</html>
